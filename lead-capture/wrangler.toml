@@ -1,0 +1,8 @@
+name = "perfectai-lead-capture"
+compatibility_date = "2025-06-01"
+pages_build_output_dir = "./dist"
+
+# Pages Functions in ./functions are auto-discovered (the /api/lead handler).
+# Secrets (AIRTABLE_TOKEN, AIRTABLE_BASE_ID, AIRTABLE_TABLE) are NOT defined here —
+# set them in the Cloudflare dashboard (Pages → Settings → Environment variables)
+# or via `wrangler pages secret put <NAME>`. Never commit them.
