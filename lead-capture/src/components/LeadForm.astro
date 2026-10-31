@@ -1,0 +1,271 @@
+---
+// Placeholders Ash can fill in later:
+//  - VCARD_URL: the hosted digital business card (the success-screen "Save Ash's contact" button).
+//  - EVENT:     default event tag stored on every lead.
+const VCARD_URL = ''; // e.g. 'https://card.perfectaihub.com' — leave '' to hide the button
+const EVENT = 'Conference 2026';
+---
+
+<section class="rise-in w-full" aria-labelledby="form-heading">
+  <!-- Brand header -->
+  <header class="mb-7 flex flex-col items-center text-center">
+    <img
+      src="/logo.png"
+      alt="PerfectAI"
+      width="76"
+      height="76"
+      class="h-[76px] w-[76px] rounded-[20px] object-contain shadow-[0_10px_30px_-12px_rgba(14,110,110,0.45)]"
+      onerror="this.style.display='none'"
+    />
+    <h1 id="form-heading" class="mt-4 text-[1.7rem] font-bold tracking-tight text-ink">
+      Let’s connect
+    </h1>
+    <p class="mt-1.5 max-w-[22rem] text-[0.98rem] leading-snug text-muted">
+      Drop your details and Ash will reach out. PerfectAI — the hub for your AI.
+    </p>
+  </header>
+
+  <!-- Card -->
+  <div
+    class="rounded-[var(--radius-card)] border border-[rgba(14,110,110,0.08)] bg-surface p-6 shadow-[0_24px_60px_-28px_rgba(14,110,110,0.40)] sm:p-7"
+  >
+    <!-- FORM STATE -->
+    <form id="lead-form" novalidate class="flex flex-col gap-4">
+      <div>
+        <label for="name" class="mb-1.5 block text-sm font-semibold text-ink">
+          Full name <span class="text-teal" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          placeholder="Jane Rivera"
+          class="min-h-[52px] w-full rounded-[var(--radius-field)] border border-[rgba(14,110,110,0.18)] bg-tint/40 px-4 text-[1rem] text-ink placeholder:text-muted/70 focus:border-teal focus:bg-surface focus:outline-none"
+        />
+        <p class="error-msg mt-1 hidden text-sm text-[#B42318]" data-for="name"></p>
+      </div>
+
+      <div>
+        <label for="email" class="mb-1.5 block text-sm font-semibold text-ink">
+          Email <span class="text-teal" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          required
+          placeholder="jane@company.com"
+          class="min-h-[52px] w-full rounded-[var(--radius-field)] border border-[rgba(14,110,110,0.18)] bg-tint/40 px-4 text-[1rem] text-ink placeholder:text-muted/70 focus:border-teal focus:bg-surface focus:outline-none"
+        />
+        <p class="error-msg mt-1 hidden text-sm text-[#B42318]" data-for="email"></p>
+      </div>
+
+      <div>
+        <label for="company" class="mb-1.5 block text-sm font-semibold text-ink">
+          Company <span class="text-muted font-normal">(optional)</span>
+        </label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          autocomplete="organization"
+          placeholder="Acme Inc."
+          class="min-h-[52px] w-full rounded-[var(--radius-field)] border border-[rgba(14,110,110,0.18)] bg-tint/40 px-4 text-[1rem] text-ink placeholder:text-muted/70 focus:border-teal focus:bg-surface focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="phone" class="mb-1.5 block text-sm font-semibold text-ink">
+          Phone <span class="text-muted font-normal">(optional)</span>
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          placeholder="+1 412 555 0142"
+          class="min-h-[52px] w-full rounded-[var(--radius-field)] border border-[rgba(14,110,110,0.18)] bg-tint/40 px-4 text-[1rem] text-ink placeholder:text-muted/70 focus:border-teal focus:bg-surface focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="interest" class="mb-1.5 block text-sm font-semibold text-ink">
+          What caught your interest? <span class="text-muted font-normal">(optional)</span>
+        </label>
+        <textarea
+          id="interest"
+          name="interest"
+          rows="3"
+          placeholder="The AI automation demo, a possible pilot, hiring…"
+          class="w-full resize-y rounded-[var(--radius-field)] border border-[rgba(14,110,110,0.18)] bg-tint/40 px-4 py-3 text-[1rem] text-ink placeholder:text-muted/70 focus:border-teal focus:bg-surface focus:outline-none"
+        ></textarea>
+      </div>
+
+      <!-- Hidden context fields -->
+      <input type="hidden" name="source" value="Conference Card" />
+      <input type="hidden" name="event" value={EVENT} />
+
+      <!-- Honeypot: real people never see or fill this. Bots do. -->
+      <div class="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label for="website2">Website</label>
+        <input id="website2" name="website2" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <button
+        id="submit-btn"
+        type="submit"
+        class="mt-2 flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-[var(--radius-field)] bg-teal px-5 text-[1.05rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(35,190,190,0.85)] transition-[transform,background-color] hover:bg-teal-deep active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+      >
+        <span class="btn-label">Connect with Ash</span>
+        <span class="btn-spinner hidden"><span class="spinner"></span></span>
+      </button>
+
+      <p
+        id="form-error"
+        role="alert"
+        class="hidden rounded-[12px] bg-[#FEF3F2] px-4 py-3 text-center text-sm font-medium text-[#B42318]"
+      ></p>
+    </form>
+
+    <!-- SUCCESS STATE -->
+    <div id="success-state" class="hidden flex-col items-center py-4 text-center">
+      <div
+        class="flex h-16 w-16 items-center justify-center rounded-full bg-teal shadow-[0_14px_30px_-10px_rgba(35,190,190,0.85)]"
+      >
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M5 12.5l4.2 4.2L19 7"
+            stroke="#fff"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <h2 class="mt-5 text-[1.4rem] font-bold text-ink">Thanks — you’re connected.</h2>
+      <p class="mt-1.5 max-w-[20rem] text-[0.98rem] leading-snug text-muted">
+        Ash will reach out. In the meantime, keep his contact handy.
+      </p>
+      {
+        VCARD_URL && (
+          <a
+            href={VCARD_URL}
+            class="mt-5 flex min-h-[52px] w-full items-center justify-center rounded-[var(--radius-field)] border-2 border-teal px-5 text-[1rem] font-semibold text-teal-deep transition-colors hover:bg-tint"
+          >
+            Save Ash’s contact
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-6 text-center text-[0.8rem] leading-relaxed text-muted">
+    <p class="font-semibold text-ink">Ash Vuyyuru — CEO, PerfectAI</p>
+    <p class="mt-0.5">
+      <a class="text-teal-deep hover:underline" href="mailto:ashv@perfectaihub.com">ashv@perfectaihub.com</a>
+      <span aria-hidden="true"> · </span>
+      <a class="text-teal-deep hover:underline" href="tel:+14123041545">412-304-1545</a>
+      <span aria-hidden="true"> · </span>
+      <a class="text-teal-deep hover:underline" href="https://perfectaihub.com">perfectaihub.com</a>
+    </p>
+  </footer>
+</section>
+
+<script>
+  const form = document.getElementById('lead-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnLabel = submitBtn.querySelector('.btn-label') as HTMLElement;
+  const btnSpinner = submitBtn.querySelector('.btn-spinner') as HTMLElement;
+  const formError = document.getElementById('form-error') as HTMLElement;
+  const successState = document.getElementById('success-state') as HTMLElement;
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function showFieldError(name: string, message: string) {
+    const input = form.elements.namedItem(name) as HTMLInputElement | null;
+    const msg = form.querySelector(`.error-msg[data-for="${name}"]`) as HTMLElement | null;
+    if (input) input.setAttribute('aria-invalid', 'true');
+    if (msg) {
+      msg.textContent = message;
+      msg.classList.remove('hidden');
+    }
+  }
+
+  function clearFieldError(name: string) {
+    const input = form.elements.namedItem(name) as HTMLInputElement | null;
+    const msg = form.querySelector(`.error-msg[data-for="${name}"]`) as HTMLElement | null;
+    if (input) input.removeAttribute('aria-invalid');
+    if (msg) msg.classList.add('hidden');
+  }
+
+  ['name', 'email'].forEach((name) => {
+    const input = form.elements.namedItem(name) as HTMLInputElement;
+    input?.addEventListener('input', () => clearFieldError(name));
+  });
+
+  function validate(data: Record<string, string>): boolean {
+    let ok = true;
+    if (!data.name.trim()) {
+      showFieldError('name', 'Your name, please.');
+      ok = false;
+    }
+    if (!data.email.trim()) {
+      showFieldError('email', 'We need an email to reach you.');
+      ok = false;
+    } else if (!EMAIL_RE.test(data.email.trim())) {
+      showFieldError('email', 'That email doesn’t look right.');
+      ok = false;
+    }
+    return ok;
+  }
+
+  function setLoading(loading: boolean) {
+    submitBtn.disabled = loading;
+    btnLabel.classList.toggle('hidden', loading);
+    btnSpinner.classList.toggle('hidden', !loading);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formError.classList.add('hidden');
+
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries()) as Record<string, string>;
+
+    if (!validate(data)) {
+      const firstInvalid = form.querySelector('[aria-invalid="true"]') as HTMLElement | null;
+      firstInvalid?.focus();
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json().catch(() => ({ ok: false }));
+
+      if (res.ok && json.ok) {
+        form.classList.add('hidden');
+        successState.classList.remove('hidden');
+        successState.classList.add('flex', 'rise-in');
+        successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        throw new Error(json.error || 'request failed');
+      }
+    } catch {
+      // Error state: clear and direct, keeps the entered data, allows retry.
+      formError.textContent =
+        'That didn’t go through — check your connection and tap Connect again. Your details are still here.';
+      formError.classList.remove('hidden');
+      setLoading(false);
+    }
+  });
+</script>

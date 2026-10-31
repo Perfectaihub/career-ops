@@ -1,0 +1,27 @@
+{
+  "name": "perfectai-lead-capture",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "PerfectAI conference lead-capture form — visitors hand us their info; saved to Airtable. Branded to match Ash's digital business card.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler pages dev ./dist",
+    "deploy": "astro build && wrangler pages deploy ./dist",
+    "qr": "node scripts/gen-qr.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.6.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260626.1",
+    "@tailwindcss/vite": "^4.1.0",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.8.0",
+    "wrangler": "^4.0.0"
+  }
+}
